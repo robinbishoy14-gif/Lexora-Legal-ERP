@@ -1,0 +1,3375 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Lexora Legal — Law Firm ERP</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+ --navy:#101827;
+ --navy2:#182337;
+ --blue:#3569e8;
+ --blue2:#4e7bf0;
+ --gold:#c99d59;
+ --bg:#f4f6fa;
+ --card:#fff;
+ --text:#172033;
+ --muted:#7d8798;
+ --line:#e5e9f0;
+ --green:#13966c;
+ --red:#d74c59;
+ --orange:#d8892c;
+ --shadow:0 10px 30px rgba(20,30,50,.07)
+}
+*{scrollbar-width:thin;scrollbar-color:#c9cfda transparent}
+body{
+ margin:0;
+ font-family:Inter,Segoe UI,Arial,sans-serif;
+ background:var(--bg);
+ color:var(--text)
+}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+/* LOGIN */
+.login-screen{
+ position:fixed;
+ inset:0;
+ background:
+ radial-gradient(circle at 20% 20%,#344d7d 0,transparent 32%),
+ radial-gradient(circle at 80% 80%,#20385e 0,transparent 35%),
+ #0c1422;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ z-index:9999
+}
+.login-card{
+ width:430px;
+ max-width:92%;
+ background:#fff;
+ border-radius:22px;
+ padding:38px;
+ box-shadow:0 35px 100px #0008
+}
+.brand{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ font-weight:800;
+ font-size:23px
+}
+.brand-logo{
+ width:44px;
+ height:44px;
+ display:grid;
+ place-items:center;
+ border-radius:12px;
+ color:#fff;
+ background:linear-gradient(135deg,var(--gold),#e4bd78);
+ font-weight:900
+}
+.login-card h1{
+ margin:32px 0 7px;
+ font-size:29px
+}
+.login-card>p{
+ color:var(--muted);
+ margin:0 0 25px
+}
+.form-group{margin-bottom:16px}
+.form-group label{
+ display:block;
+ font-size:12px;
+ font-weight:800;
+ margin-bottom:7px
+}
+.form-group input,
+.form-group select,
+.form-group textarea{
+ width:100%;
+ padding:12px 13px;
+ border:1px solid var(--line);
+ border-radius:9px;
+ outline:none;
+ background:#fafbfd
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+ border-color:var(--blue)
+}
+.login-btn{
+ width:100%;
+ border:0;
+ padding:13px;
+ border-radius:10px;
+ background:var(--blue);
+ color:#fff;
+ font-weight:800
+}
+.demo-box{
+ margin-top:17px;
+ background:#f3f6ff;
+ border:1px solid #e2e9ff;
+ padding:13px;
+ border-radius:10px;
+ font-size:12px;
+ line-height:1.7;
+ color:#52617b
+}
+.login-error{
+ color:var(--red);
+ font-size:12px;
+ margin-bottom:12px;
+ display:none
+}
+
+/* APP */
+.app{min-height:100vh}
+.sidebar{
+ position:fixed;
+ left:0;
+ top:0;
+ bottom:0;
+ width:245px;
+ background:var(--navy);
+ color:#b9c2d0;
+ padding:18px 13px;
+ overflow:auto;
+ z-index:50;
+ transition:.25s
+}
+.sidebar .brand{
+ color:#fff;
+ padding:6px 8px 27px
+}
+.nav-title{
+ color:#69768a;
+ font-size:9px;
+ text-transform:uppercase;
+ letter-spacing:1.5px;
+ padding:15px 11px 7px
+}
+.nav-item{
+ display:flex;
+ align-items:center;
+ gap:11px;
+ padding:10px 12px;
+ border-radius:8px;
+ margin:2px 0;
+ font-size:12px;
+ cursor:pointer;
+ transition:.15s
+}
+.nav-item:hover,
+.nav-item.active{
+ background:#25334a;
+ color:#fff
+}
+.nav-icon{
+ width:20px;
+ text-align:center
+}
+.main{
+ margin-left:245px;
+ min-height:100vh
+}
+.topbar{
+ position:sticky;
+ top:0;
+ z-index:40;
+ height:70px;
+ background:#fff;
+ border-bottom:1px solid var(--line);
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:0 28px
+}
+.search{
+ width:350px;
+ background:#f5f7fa;
+ padding:10px 13px;
+ display:flex;
+ align-items:center;
+ gap:8px;
+ border-radius:9px
+}
+.search input{
+ border:0;
+ outline:0;
+ background:none;
+ width:100%;
+ font-size:12px
+}
+.top-right{
+ display:flex;
+ align-items:center;
+ gap:17px
+}
+.top-btn{
+ background:none;
+ border:0;
+ font-size:18px;
+ color:#566278;
+ position:relative
+}
+.notification-dot{
+ width:7px;
+ height:7px;
+ background:#df4c58;
+ border-radius:50%;
+ position:absolute;
+ right:0;
+ top:0
+}
+.avatar{
+ width:37px;
+ height:37px;
+ border-radius:50%;
+ background:#e1e9ff;
+ color:#365fc5;
+ display:grid;
+ place-items:center;
+ font-size:11px;
+ font-weight:900
+}
+.user-name{
+ font-size:12px;
+ font-weight:800
+}
+.mobile-menu{display:none}
+.content{padding:28px}
+.page{display:none}
+.page.active{display:block}
+.heading{
+ display:flex;
+ align-items:flex-start;
+ justify-content:space-between;
+ gap:15px;
+ margin-bottom:22px
+}
+.heading h1{
+ font-size:25px;
+ margin:0
+}
+.heading p{
+ margin:5px 0 0;
+ font-size:12px;
+ color:var(--muted)
+}
+.btn{
+ border:0;
+ background:var(--blue);
+ color:#fff;
+ border-radius:9px;
+ padding:10px 15px;
+ font-size:12px;
+ font-weight:800
+}
+.btn.secondary{
+ background:#fff;
+ color:var(--text);
+ border:1px solid var(--line)
+}
+.btn.danger{
+ background:#fff0f2;
+ color:var(--red)
+}
+
+/* CARDS */
+.stats{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:16px;
+ margin-bottom:20px
+}
+.stat{
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:13px;
+ padding:18px;
+ box-shadow:var(--shadow)
+}
+.stat-top{
+ color:var(--muted);
+ font-size:11px;
+ display:flex;
+ justify-content:space-between
+}
+.stat h2{
+ margin:9px 0 6px;
+ font-size:26px
+}
+.green{color:var(--green)}
+.red{color:var(--red)}
+.orange{color:var(--orange)}
+.card{
+ background:#fff;
+ border:1px solid var(--line);
+ border-radius:13px;
+ box-shadow:var(--shadow);
+ overflow:hidden
+}
+.card-head{
+ padding:16px 18px;
+ border-bottom:1px solid var(--line);
+ display:flex;
+ align-items:center;
+ justify-content:space-between
+}
+.card-head h3{
+ margin:0;
+ font-size:14px
+}
+.card-body{padding:18px}
+.grid2{
+ display:grid;
+ grid-template-columns:1.45fr 1fr;
+ gap:18px
+}
+.grid3{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:17px
+}
+.notice{
+ background:#f7f8fb;
+ border:1px solid #edf0f4;
+ border-radius:9px;
+ padding:12px;
+ margin-bottom:9px;
+ font-size:11px
+}
+.notice b{
+ display:block;
+ font-size:12px;
+ margin-bottom:3px
+}
+.notice small{color:var(--muted)}
+.badge{
+ display:inline-block;
+ padding:5px 8px;
+ border-radius:20px;
+ font-size:9px;
+ font-weight:900
+}
+.badge.green{background:#e5f7f0;color:#12805f}
+.badge.blue{background:#eaf0ff;color:#3763d4}
+.badge.orange{background:#fff2df;color:#b36b1d}
+.badge.red{background:#ffe8eb;color:#bd3e4b}
+table{
+ width:100%;
+ border-collapse:collapse;
+ min-width:720px
+}
+th,td{
+ padding:13px 14px;
+ border-bottom:1px solid var(--line);
+ text-align:left;
+ font-size:11px
+}
+th{
+ background:#fafbfc;
+ color:#8791a1;
+ font-size:9px;
+ text-transform:uppercase;
+ letter-spacing:.5px
+}
+.table-wrap{overflow:auto}
+.progress{
+ height:7px;
+ background:#edf0f5;
+ border-radius:20px;
+ overflow:hidden
+}
+.progress span{
+ display:block;
+ height:100%;
+ background:var(--blue);
+ border-radius:20px
+}
+.quick-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px
+}
+.quick-grid button{
+ border:1px solid var(--line);
+ background:#f8f9fb;
+ border-radius:9px;
+ padding:12px 6px;
+ font-size:10px;
+ font-weight:800;
+ color:#48566e
+}
+.activity{
+ display:flex;
+ gap:10px;
+ padding:11px 0;
+ border-bottom:1px solid var(--line)
+}
+.activity:last-child{border:0}
+.activity-icon{
+ width:32px;
+ height:32px;
+ background:#edf2ff;
+ color:#4168cf;
+ border-radius:8px;
+ display:grid;
+ place-items:center;
+ flex:none
+}
+.activity b{font-size:11px}
+.activity p{
+ margin:3px 0 0;
+ color:var(--muted);
+ font-size:10px
+}
+
+/* CHART */
+.chart{
+ height:185px;
+ display:flex;
+ align-items:flex-end;
+ gap:12px;
+ padding:10px 5px 0
+}
+.bar{
+ flex:1;
+ background:#dbe5ff;
+ border-radius:6px 6px 0 0;
+ position:relative;
+ min-height:20px
+}
+.bar span{
+ position:absolute;
+ bottom:-19px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:9px;
+ color:var(--muted)
+}
+
+/* TABS */
+.tabs{
+ display:flex;
+ flex-wrap:wrap;
+ gap:7px;
+ margin-bottom:17px
+}
+.tab{
+ border:1px solid var(--line);
+ background:#fff;
+ padding:8px 11px;
+ border-radius:8px;
+ font-size:10px;
+ font-weight:800
+}
+.tab.active{
+ background:var(--navy);
+ color:#fff
+}
+
+/* FORMS */
+.form-grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:13px
+}
+.form-grid .full{grid-column:1/-1}
+.form-actions{
+ display:flex;
+ gap:9px;
+ justify-content:flex-end;
+ margin-top:18px
+}
+.modal{
+ position:fixed;
+ inset:0;
+ background:#07101ccc;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ z-index:500
+}
+.modal.show{display:flex}
+.modal-box{
+ background:#fff;
+ width:min(650px,94%);
+ max-height:90vh;
+ overflow:auto;
+ border-radius:16px;
+ padding:24px
+}
+.modal-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:20px
+}
+.modal-head h2{
+ font-size:20px;
+ margin:0
+}
+.close{
+ background:none;
+ border:0;
+ font-size:24px;
+ color:#687388
+}
+textarea{
+ resize:vertical
+}
+
+/* CALENDAR */
+.calendar{
+ display:grid;
+ grid-template-columns:repeat(7,1fr);
+ gap:6px
+}
+.day{
+ min-height:70px;
+ padding:9px;
+ background:#fafbfc;
+ border-radius:7px;
+ font-size:10px
+}
+.day.head{
+ min-height:auto;
+ text-align:center;
+ color:var(--muted);
+ background:none;
+ font-weight:800
+}
+.day.event{
+ background:#eaf0ff;
+ color:#315fcf;
+ font-weight:800
+}
+
+/* TOAST */
+.toast{
+ position:fixed;
+ right:25px;
+ bottom:25px;
+ background:#172235;
+ color:#fff;
+ padding:13px 17px;
+ border-radius:10px;
+ font-size:11px;
+ z-index:1000;
+ box-shadow:0 15px 40px #0005;
+ display:none
+}
+
+/* MOBILE */
+@media(max-width:1000px){
+ .sidebar{
+  transform:translateX(-100%)
+ }
+ .sidebar.open{
+  transform:translateX(0)
+ }
+ .main{margin-left:0}
+ .mobile-menu{display:block}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .grid2,.grid3{grid-template-columns:1fr}
+}
+@media(max-width:650px){
+ .content{padding:17px}
+ .topbar{padding:0 15px}
+ .search{display:none}
+ .user-name{display:none}
+ .stats{grid-template-columns:1fr}
+ .heading{flex-direction:column}
+ .form-grid{grid-template-columns:1fr}
+ .form-grid .full{grid-column:auto}
+ .quick-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login-screen" id="loginScreen">
+ <div class="login-card">
+  <div class="brand">
+   <div class="brand-logo">L</div>
+   Lexora Legal
+  </div>
+
+  <h1>Welcome back</h1>
+  <p>Sign in to your law firm management portal.</p>
+
+  <div class="login-error" id="loginError">
+   Invalid email or password.
+  </div>
+
+  <div class="form-group">
+   <label>Email address</label>
+   <input id="loginEmail" type="email" value="admin@lexora.demo">
+  </div>
+
+  <div class="form-group">
+   <label>Password</label>
+   <input id="loginPassword" type="password" value="demo123">
+  </div>
+
+  <div class="form-group">
+   <label>Branch</label>
+   <select id="loginBranch">
+    <option>Head Office — Cairo</option>
+    <option>Giza Branch</option>
+    <option>Alexandria Branch</option>
+   </select>
+  </div>
+
+  <button class="login-btn" onclick="login()">Sign In Securely</button>
+
+  <div class="demo-box">
+   <b>Demo account</b><br>
+   Email: admin@lexora.demo<br>
+   Password: demo123<br>
+   <span>All information is demo data stored locally in your browser.</span>
+  </div>
+ </div>
+</div>
+
+<!-- APPLICATION -->
+<div class="app hidden" id="app">
+
+<aside class="sidebar" id="sidebar">
+
+ <div class="brand">
+  <div class="brand-logo">L</div>
+  Lexora
+ </div>
+
+ <div class="nav-title">Workspace</div>
+
+ <div class="nav-item active" onclick="openPage('dashboard',this)">
+  <span class="nav-icon">⌂</span>Dashboard
+ </div>
+
+ <div class="nav-item" onclick="openPage('cases',this)">
+  <span class="nav-icon">▣</span>Cases
+ </div>
+
+ <div class="nav-item" onclick="openPage('clients',this)">
+  <span class="nav-icon">♙</span>Clients & Prospects
+ </div>
+
+ <div class="nav-item" onclick="openPage('tasks',this)">
+  <span class="nav-icon">✓</span>Tasks & Workflow
+ </div>
+
+ <div class="nav-item" onclick="openPage('calendar',this)">
+  <span class="nav-icon">□</span>Calendar
+ </div>
+
+ <div class="nav-title">Firm Management</div>
+
+ <div class="nav-item" onclick="openPage('staff',this)">
+  <span class="nav-icon">♟</span>Staff
+ </div>
+
+ <div class="nav-item" onclick="openPage('approvals',this)">
+  <span class="nav-icon">⇄</span>Approvals
+ </div>
+
+ <div class="nav-item" onclick="openPage('branches',this)">
+  <span class="nav-icon">⌖</span>Branches
+ </div>
+
+ <div class="nav-item" onclick="openPage('documents',this)">
+  <span class="nav-icon">▤</span>Documents
+ </div>
+
+ <div class="nav-title">Finance</div>
+
+ <div class="nav-item" onclick="openPage('billing',this)">
+  <span class="nav-icon">¤</span>Billing & Payments
+ </div>
+
+ <div class="nav-item" onclick="openPage('expenses',this)">
+  <span class="nav-icon">◈</span>Time & Expenses
+ </div>
+
+ <div class="nav-title">Communication</div>
+
+ <div class="nav-item" onclick="openPage('mail',this)">
+  <span class="nav-icon">✉</span>Professional Email
+ </div>
+
+ <div class="nav-item" onclick="openPage('chat',this)">
+  <span class="nav-icon">☏</span>Team Chat
+ </div>
+
+ <div class="nav-title">Security & Insights</div>
+
+ <div class="nav-item" onclick="openPage('reports',this)">
+  <span class="nav-icon">▥</span>Reports
+ </div>
+
+ <div class="nav-item" onclick="openPage('audit',this)">
+  <span class="nav-icon">◉</span>Audit Trail
+ </div>
+
+ <div class="nav-item" onclick="openPage('research',this)">
+  <span class="nav-icon">⌕</span>Legal Research
+ </div>
+
+ <div class="nav-item" onclick="openPage('settings',this)">
+  <span class="nav-icon">⚙</span>Settings
+ </div>
+
+ <div class="nav-item" onclick="logout()" style="margin-top:12px;color:#f27b86">
+  <span class="nav-icon">↪</span>Sign Out
+ </div>
+
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+
+ <div>
+  <button class="top-btn mobile-menu" onclick="toggleSidebar()">☰</button>
+
+  <div class="search">
+   <span>⌕</span>
+   <input id="globalSearch" placeholder="Search cases, clients, documents..." onkeydown="globalSearch(event)">
+  </div>
+ </div>
+
+ <div class="top-right">
+  <button class="top-btn" onclick="showToast('4 new notifications')">
+   ♢<i class="notification-dot"></i>
+  </button>
+
+  <button class="top-btn" onclick="showToast('Help center opened')">?</button>
+
+  <div class="avatar" id="avatar">AD</div>
+
+  <span class="user-name" id="userName">Admin</span>
+ </div>
+
+</header>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<section class="page active" id="dashboard">
+
+ <div class="heading">
+  <div>
+   <h1>Good evening, <span id="welcomeName">Admin</span></h1>
+   <p id="dateText"></p>
+  </div>
+
+  <button class="btn" onclick="openModal('case')">+ New Case</button>
+ </div>
+
+ <div class="stats">
+
+  <div class="stat">
+   <div class="stat-top">Active Cases <span>▣</span></div>
+   <h2 id="statCases">248</h2>
+   <small class="green">↑ 12.4% this month</small>
+  </div>
+
+  <div class="stat">
+   <div class="stat-top">Pending Tasks <span>✓</span></div>
+   <h2 id="statTasks">37</h2>
+   <small class="orange">8 due today</small>
+  </div>
+
+  <div class="stat">
+   <div class="stat-top">Outstanding Fees <span>¤</span></div>
+   <h2>$84,620</h2>
+   <small class="red">14 invoices overdue</small>
+  </div>
+
+  <div class="stat">
+   <div class="stat-top">Staff Online <span>●</span></div>
+   <h2>42 / 57</h2>
+   <small class="green">73% currently active</small>
+  </div>
+
+ </div>
+
+ <div class="grid2">
+
+  <div class="card">
+   <div class="card-head">
+    <h3>Case Activity</h3>
+    <button class="tab" onclick="openPage('reports')">View report</button>
+   </div>
+
+   <div class="card-body">
+    <div class="chart">
+     <div class="bar" style="height:52%"><span>Mon</span></div>
+     <div class="bar" style="height:71%"><span>Tue</span></div>
+     <div class="bar" style="height:47%"><span>Wed</span></div>
+     <div class="bar" style="height:86%"><span>Thu</span></div>
+     <div class="bar" style="height:65%"><span>Fri</span></div>
+     <div class="bar" style="height:91%"><span>Sat</span></div>
+     <div class="bar" style="height:76%"><span>Sun</span></div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head">
+    <h3>Firm Announcements</h3>
+    <button class="tab" onclick="openModal('notice')">+ Notice</button>
+   </div>
+
+   <div class="card-body" id="announcementList">
+    <div class="notice">
+     <b>Annual leave policy updated</b>
+     HR published the revised 2026 policy.
+    </div>
+
+    <div class="notice">
+     <b>System maintenance</b>
+     Scheduled Saturday from 02:00–03:00.
+    </div>
+
+    <div class="notice">
+     <b>Welcome Sarah!</b>
+     New associate joined Corporate Law.
+    </div>
+   </div>
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="grid2">
+
+  <div class="card">
+   <div class="card-head">
+    <h3>Priority Cases</h3>
+    <button class="tab" onclick="openPage('cases')">All cases</button>
+   </div>
+
+   <div class="table-wrap">
+    <table>
+     <thead>
+      <tr>
+       <th>File</th>
+       <th>Client</th>
+       <th>Practice</th>
+       <th>Status</th>
+       <th>Deadline</th>
+      </tr>
+     </thead>
+
+     <tbody id="priorityCases">
+      <tr>
+       <td><b>LEX-2026-1048</b></td>
+       <td>Al Noor Holdings</td>
+       <td>Corporate</td>
+       <td><span class="badge red">Urgent</span></td>
+       <td>16 Sep</td>
+      </tr>
+
+      <tr>
+       <td><b>LEX-2026-0981</b></td>
+       <td>Horizon Group</td>
+       <td>Litigation</td>
+       <td><span class="badge orange">Hearing</span></td>
+       <td>18 Sep</td>
+      </tr>
+
+      <tr>
+       <td><b>LEX-2026-0920</b></td>
+       <td>Vertex Ltd.</td>
+       <td>Real Estate</td>
+       <td><span class="badge blue">Active</span></td>
+       <td>22 Sep</td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head">
+    <h3>Recent Activity</h3>
+   </div>
+
+   <div class="card-body" id="activityList">
+
+    <div class="activity">
+     <div class="activity-icon">▤</div>
+     <div>
+      <b>Sarah uploaded a document</b>
+      <p>Contract_Amendment.pdf · 4 min ago</p>
+     </div>
+    </div>
+
+    <div class="activity">
+     <div class="activity-icon">✓</div>
+     <div>
+      <b>Omar completed a case task</b>
+      <p>Review evidence · 18 min ago</p>
+     </div>
+    </div>
+
+    <div class="activity">
+     <div class="activity-icon">¤</div>
+     <div>
+      <b>Payment received</b>
+      <p>Invoice INV-8921 · 32 min ago</p>
+     </div>
+    </div>
+
+   </div>
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="grid3">
+
+  <div class="card">
+   <div class="card-head"><h3>Birthday Today 🎂</h3></div>
+   <div class="card-body">
+    <div class="notice">
+     <b>Sarah Ahmed</b>
+     Associate Lawyer
+     <br><br>
+     <button class="tab" onclick="showToast('Birthday wish sent 🎉')">Send Wish 🎉</button>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Quick Actions</h3></div>
+   <div class="card-body">
+    <div class="quick-grid">
+     <button onclick="openModal('case')">＋ Case</button>
+     <button onclick="openModal('client')">♙ Client</button>
+     <button onclick="openModal('document')">▤ Document</button>
+     <button onclick="openModal('leave')">◷ Leave</button>
+     <button onclick="openModal('invoice')">¤ Invoice</button>
+     <button onclick="showToast('Cash requisition created')">₿ Cash</button>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Case Completion</h3></div>
+   <div class="card-body">
+    <h2>78%</h2>
+    <div class="progress" style="margin-top:14px">
+     <span style="width:78%"></span>
+    </div>
+    <p style="font-size:10px;color:#888">156 of 200 cases completed</p>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- CASES -->
+<section class="page" id="cases">
+
+ <div class="heading">
+  <div>
+   <h1>Case Management</h1>
+   <p>Manage litigation, corporate, property and advisory matters.</p>
+  </div>
+  <button class="btn" onclick="openModal('case')">+ Create Case</button>
+ </div>
+
+ <div class="tabs">
+  <button class="tab active">All Cases</button>
+  <button class="tab">Pending</button>
+  <button class="tab">Completed</button>
+  <button class="tab">Urgent</button>
+ </div>
+
+ <div class="card">
+
+  <div class="card-head">
+   <h3>Case Register</h3>
+   <button class="tab" onclick="exportData('cases')">Export CSV</button>
+  </div>
+
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>File Number</th>
+      <th>Client</th>
+      <th>Case</th>
+      <th>Lawyer</th>
+      <th>Branch</th>
+      <th>Status</th>
+      <th>Actions</th>
+     </tr>
+    </thead>
+
+    <tbody id="caseTable"></tbody>
+   </table>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- CLIENTS -->
+<section class="page" id="clients">
+
+ <div class="heading">
+  <div>
+   <h1>Clients & Prospects</h1>
+   <p>Centralized client relationships and communications.</p>
+  </div>
+  <button class="btn" onclick="openModal('client')">+ Add Client</button>
+ </div>
+
+ <div class="stats">
+
+  <div class="stat">
+   <div class="stat-top">Active Clients</div>
+   <h2 id="clientCount">684</h2>
+  </div>
+
+  <div class="stat">
+   <div class="stat-top">Prospects</div>
+   <h2>96</h2>
+  </div>
+
+  <div class="stat">
+   <div class="stat-top">Corporate Accounts</div>
+   <h2>142</h2>
+  </div>
+
+  <div class="stat">
+   <div class="stat-top">Communications</div>
+   <h2>1,284</h2>
+  </div>
+
+ </div>
+
+ <div class="card">
+  <div class="card-head"><h3>Client Directory</h3></div>
+
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>Client</th>
+      <th>Type</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Cases</th>
+      <th>Actions</th>
+     </tr>
+    </thead>
+
+    <tbody id="clientTable"></tbody>
+   </table>
+  </div>
+ </div>
+
+</section>
+
+<!-- TASKS -->
+<section class="page" id="tasks">
+
+ <div class="heading">
+  <div>
+   <h1>Tasks & Workflow</h1>
+   <p>Delegate and track work across teams.</p>
+  </div>
+  <button class="btn" onclick="openModal('task')">+ Assign Task</button>
+ </div>
+
+ <div class="grid3">
+
+  <div class="card">
+   <div class="card-head">
+    <h3>To Do</h3>
+    <span class="badge blue">14</span>
+   </div>
+   <div class="card-body" id="todoTasks"></div>
+  </div>
+
+  <div class="card">
+   <div class="card-head">
+    <h3>In Progress</h3>
+    <span class="badge orange">16</span>
+   </div>
+   <div class="card-body">
+    <div class="notice">
+     <b>Contract review</b>
+     Al Noor Holdings
+     <br><small>72% complete</small>
+     <div class="progress" style="margin-top:7px">
+      <span style="width:72%"></span>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head">
+    <h3>Completed</h3>
+    <span class="badge green">37</span>
+   </div>
+   <div class="card-body">
+    <div class="notice">
+     <b>Client verification</b>
+     Completed by Mina
+     <br><small>Today, 08:25</small>
+    </div>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- CALENDAR -->
+<section class="page" id="calendar">
+
+ <div class="heading">
+  <div>
+   <h1>Calendar & Scheduling</h1>
+   <p>Hearings, deadlines, appointments and meetings.</p>
+  </div>
+  <button class="btn" onclick="openModal('event')">+ Event</button>
+ </div>
+
+ <div class="card">
+  <div class="card-head">
+   <h3>September 2026</h3>
+   <button class="tab" onclick="showToast('Today selected')">Today</button>
+  </div>
+
+  <div class="card-body">
+
+   <div class="calendar">
+    <div class="day head">MON</div>
+    <div class="day head">TUE</div>
+    <div class="day head">WED</div>
+    <div class="day head">THU</div>
+    <div class="day head">FRI</div>
+    <div class="day head">SAT</div>
+    <div class="day head">SUN</div>
+
+    <div class="day"></div>
+    <div class="day">1</div>
+    <div class="day">2</div>
+    <div class="day">3</div>
+    <div class="day">4</div>
+    <div class="day">5</div>
+    <div class="day">6</div>
+
+    <div class="day">7</div>
+    <div class="day">8</div>
+    <div class="day">9</div>
+    <div class="day">10</div>
+    <div class="day">11</div>
+    <div class="day">12</div>
+    <div class="day">13</div>
+
+    <div class="day event">14<br>3 events</div>
+    <div class="day event">15<br>Hearing</div>
+    <div class="day event">16<br>Deadline</div>
+    <div class="day">17</div>
+    <div class="day event">18<br>Meeting</div>
+    <div class="day">19</div>
+    <div class="day">20</div>
+
+    <div class="day">21</div>
+    <div class="day">22</div>
+    <div class="day">23</div>
+    <div class="day">24</div>
+    <div class="day">25</div>
+    <div class="day">26</div>
+    <div class="day">27</div>
+
+    <div class="day">28</div>
+    <div class="day">29</div>
+    <div class="day">30</div>
+   </div>
+
+  </div>
+ </div>
+
+</section>
+
+<!-- STAFF -->
+<section class="page" id="staff">
+
+ <div class="heading">
+  <div>
+   <h1>Staff Management</h1>
+   <p>Attendance, leave, departments and employee activity.</p>
+  </div>
+  <button class="btn" onclick="openModal('staff')">+ Add Staff</button>
+ </div>
+
+ <div class="stats">
+  <div class="stat"><div class="stat-top">Present Today</div><h2>42</h2></div>
+  <div class="stat"><div class="stat-top">On Leave</div><h2>6</h2></div>
+  <div class="stat"><div class="stat-top">Late Check-ins</div><h2>4</h2></div>
+  <div class="stat"><div class="stat-top">Departments</div><h2>9</h2></div>
+ </div>
+
+ <div class="card">
+  <div class="card-head">
+   <h3>Employee Attendance</h3>
+   <button class="tab" onclick="showToast('Attendance report exported')">Export</button>
+  </div>
+
+  <div class="table-wrap">
+   <table>
+    <tr>
+     <th>Employee</th>
+     <th>Department</th>
+     <th>Role</th>
+     <th>Clock In</th>
+     <th>Status</th>
+    </tr>
+
+    <tr>
+     <td><b>Sarah Ahmed</b></td>
+     <td>Litigation</td>
+     <td>Associate</td>
+     <td>08:51</td>
+     <td><span class="badge green">Present</span></td>
+    </tr>
+
+    <tr>
+     <td><b>Omar Hassan</b></td>
+     <td>Litigation</td>
+     <td>Partner</td>
+     <td>08:34</td>
+     <td><span class="badge green">Present</span></td>
+    </tr>
+
+    <tr>
+     <td><b>Mina George</b></td>
+     <td>Corporate</td>
+     <td>Associate</td>
+     <td>09:21</td>
+     <td><span class="badge orange">Late</span></td>
+    </tr>
+
+   </table>
+  </div>
+ </div>
+
+</section>
+
+<!-- APPROVALS -->
+<section class="page" id="approvals">
+
+ <div class="heading">
+  <div>
+   <h1>Approval Workflows</h1>
+   <p>Multi-level approval processes by role and department.</p>
+  </div>
+  <button class="btn" onclick="showToast('Workflow configuration opened')">Configure</button>
+ </div>
+
+ <div class="grid3">
+
+  <div class="card">
+   <div class="card-head"><h3>Leave Requests</h3><span class="badge orange">4</span></div>
+   <div class="card-body">
+    <div class="notice">
+     <b>Sarah Ahmed</b>
+     Annual Leave · 18–20 Sep
+     <br><br>
+     <button class="tab" onclick="approve(this)">Approve</button>
+     <button class="tab" onclick="reject(this)">Reject</button>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Cash Requests</h3><span class="badge blue">3</span></div>
+   <div class="card-body">
+    <div class="notice">
+     <b>REQ-2208</b>
+     Court filing expenses — $420
+     <br><br>
+     <button class="tab" onclick="approve(this)">Approve</button>
+    </div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Purchase Requests</h3><span class="badge orange">2</span></div>
+   <div class="card-body">
+    <div class="notice">
+     <b>PR-781</b>
+     Legal research subscription
+     <br><br>
+     <button class="tab" onclick="approve(this)">Review</button>
+    </div>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- BRANCHES -->
+<section class="page" id="branches">
+
+ <div class="heading">
+  <div>
+   <h1>Branches</h1>
+   <p>Manage offices and branch-specific access.</p>
+  </div>
+  <button class="btn" onclick="openModal('branch')">+ Add Branch</button>
+ </div>
+
+ <div class="grid3">
+
+  <div class="card">
+   <div class="card-body">
+    <h2>Cairo HQ</h2>
+    <p style="font-size:11px;color:#888">Head Office</p>
+    <hr style="border:0;border-top:1px solid #eee">
+    <div class="stat-top">Staff <b>31</b></div><br>
+    <div class="stat-top">Active Cases <b>142</b></div><br>
+    <span class="badge green">Online</span>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-body">
+    <h2>Giza Branch</h2>
+    <p style="font-size:11px;color:#888">Giza Legal Office</p>
+    <hr style="border:0;border-top:1px solid #eee">
+    <div class="stat-top">Staff <b>14</b></div><br>
+    <div class="stat-top">Active Cases <b>61</b></div><br>
+    <span class="badge green">Online</span>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-body">
+    <h2>Alexandria</h2>
+    <p style="font-size:11px;color:#888">Alexandria Branch</p>
+    <hr style="border:0;border-top:1px solid #eee">
+    <div class="stat-top">Staff <b>12</b></div><br>
+    <div class="stat-top">Active Cases <b>45</b></div><br>
+    <span class="badge green">Online</span>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- DOCUMENTS -->
+<section class="page" id="documents">
+
+ <div class="heading">
+  <div>
+   <h1>Documents & Custody</h1>
+   <p>Secure repository with code-based document search.</p>
+  </div>
+  <button class="btn" onclick="openModal('document')">+ Upload Document</button>
+ </div>
+
+ <div class="card">
+
+  <div class="card-head">
+   <input id="documentSearch"
+    oninput="searchDocuments()"
+    placeholder="Search document code..."
+    style="width:300px;max-width:60%;padding:10px;border:1px solid var(--line);border-radius:8px">
+   <span class="badge green">Encrypted Repository</span>
+  </div>
+
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>Code</th>
+      <th>Document</th>
+      <th>File</th>
+      <th>Owner</th>
+      <th>Access</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+    <tbody id="documentTable"></tbody>
+   </table>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- BILLING -->
+<section class="page" id="billing">
+
+ <div class="heading">
+  <div>
+   <h1>Billing & Payments</h1>
+   <p>Invoices, fee notes, payments and collections.</p>
+  </div>
+  <button class="btn" onclick="openModal('invoice')">+ New Invoice</button>
+ </div>
+
+ <div class="stats">
+  <div class="stat"><div class="stat-top">Revenue This Month</div><h2>$182,450</h2></div>
+  <div class="stat"><div class="stat-top">Paid Invoices</div><h2>164</h2></div>
+  <div class="stat"><div class="stat-top">Outstanding</div><h2>$84,620</h2></div>
+  <div class="stat"><div class="stat-top">Overdue</div><h2>$21,840</h2></div>
+ </div>
+
+ <div class="card">
+  <div class="card-head">
+   <h3>Invoices</h3>
+   <button class="tab" onclick="exportData('invoices')">Export</button>
+  </div>
+
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>Invoice</th>
+      <th>Client</th>
+      <th>Case</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th>Action</th>
+     </tr>
+    </thead>
+    <tbody id="invoiceTable"></tbody>
+   </table>
+  </div>
+ </div>
+
+</section>
+
+<!-- EXPENSES -->
+<section class="page" id="expenses">
+
+ <div class="heading">
+  <div>
+   <h1>Time & Expenses</h1>
+   <p>Track billable hours and case expenses.</p>
+  </div>
+  <button class="btn" onclick="openModal('time')">+ Time Entry</button>
+ </div>
+
+ <div class="stats">
+  <div class="stat"><div class="stat-top">Billable Hours</div><h2>1,842h</h2></div>
+  <div class="stat"><div class="stat-top">Billable Value</div><h2>$246,800</h2></div>
+  <div class="stat"><div class="stat-top">Expenses</div><h2>$18,420</h2></div>
+  <div class="stat"><div class="stat-top">Utilization</div><h2>82%</h2></div>
+ </div>
+
+ <div class="card">
+  <div class="card-head"><h3>Recent Time Entries</h3></div>
+  <div class="table-wrap">
+   <table>
+    <tr>
+     <th>Date</th>
+     <th>Lawyer</th>
+     <th>Case</th>
+     <th>Description</th>
+     <th>Hours</th>
+     <th>Value</th>
+    </tr>
+    <tr>
+     <td>14 Sep</td>
+     <td>Sarah Ahmed</td>
+     <td>LEX-2026-1048</td>
+     <td>Evidence review</td>
+     <td>3.5</td>
+     <td>$875</td>
+    </tr>
+    <tr>
+     <td>14 Sep</td>
+     <td>Omar Hassan</td>
+     <td>LEX-2026-0981</td>
+     <td>Hearing preparation</td>
+     <td>2</td>
+     <td>$600</td>
+    </tr>
+   </table>
+  </div>
+ </div>
+
+</section>
+
+<!-- EMAIL -->
+<section class="page" id="mail">
+
+ <div class="heading">
+  <div>
+   <h1>Professional Email</h1>
+   <p>Track client correspondence and case-linked messages.</p>
+  </div>
+  <button class="btn" onclick="openModal('email')">+ Compose</button>
+ </div>
+
+ <div class="grid2">
+
+  <div class="card">
+   <div class="card-head"><h3>Inbox</h3><span class="badge blue">8 New</span></div>
+   <div class="card-body">
+
+    <div class="notice">
+     <b>Re: Contract Amendment — Al Noor</b>
+     Sarah Ahmed · 10:42 AM
+    </div>
+
+    <div class="notice">
+     <b>Upcoming Hearing Confirmation</b>
+     Horizon Group · 09:18 AM
+    </div>
+
+    <div class="notice">
+     <b>Document Request</b>
+     Delta Investments · Yesterday
+    </div>
+
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Correspondence</h3></div>
+   <div class="card-body">
+    <div class="stat-top">Sent <b>1,482</b></div>
+    <br>
+    <div class="stat-top">Received <b>1,928</b></div>
+    <br>
+    <div class="stat-top">Case-linked <b>94%</b></div>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- CHAT -->
+<section class="page" id="chat">
+
+ <div class="heading">
+  <div>
+   <h1>Team Collaboration</h1>
+   <p>Internal team rooms and case communication.</p>
+  </div>
+  <button class="btn" onclick="openModal('chat')">+ New Room</button>
+ </div>
+
+ <div class="grid3">
+
+  <div class="card">
+   <div class="card-head"><h3># Litigation Team</h3></div>
+   <div class="card-body">
+    <div class="notice"><b>Omar</b>Uploaded the latest hearing notes.</div>
+    <div class="notice"><b>Sarah</b>I'll review them before 5 PM.</div>
+    <input id="chatInput" placeholder="Write a message..."
+     style="width:100%;padding:11px;border:1px solid #ddd;border-radius:8px"
+     onkeydown="sendChat(event)">
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3># Corporate</h3></div>
+   <div class="card-body">
+    <div class="notice"><b>Daniel</b>New prospect assigned to the team.</div>
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3># General</h3></div>
+   <div class="card-body">
+    <div class="notice"><b>HR</b>Birthday wishes for Sarah today 🎂</div>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- REPORTS -->
+<section class="page" id="reports">
+
+ <div class="heading">
+  <div>
+   <h1>Reports & Analytics</h1>
+   <p>Firm-wide decision-making insights.</p>
+  </div>
+  <button class="btn" onclick="showToast('Report generated successfully')">Generate Report</button>
+ </div>
+
+ <div class="stats">
+  <div class="stat"><div class="stat-top">Case Success Rate</div><h2>87.4%</h2></div>
+  <div class="stat"><div class="stat-top">Average Duration</div><h2>46 days</h2></div>
+  <div class="stat"><div class="stat-top">Client Retention</div><h2>93%</h2></div>
+  <div class="stat"><div class="stat-top">Utilization</div><h2>82%</h2></div>
+ </div>
+
+ <div class="grid2">
+
+  <div class="card">
+   <div class="card-head"><h3>Revenue by Practice</h3></div>
+   <div class="card-body">
+
+    <p style="font-size:11px">Corporate Law — $82,400</p>
+    <div class="progress" style="margin:8px 0 15px"><span style="width:84%"></span></div>
+
+    <p style="font-size:11px">Litigation — $65,200</p>
+    <div class="progress" style="margin:8px 0 15px"><span style="width:67%"></span></div>
+
+    <p style="font-size:11px">Real Estate — $48,600</p>
+    <div class="progress" style="margin:8px 0 15px"><span style="width:52%"></span></div>
+
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Management Insights</h3></div>
+   <div class="card-body">
+    <div class="notice"><b>⚡ 12 urgent cases</b>require attention.</div>
+    <div class="notice"><b>📈 Revenue increased</b>16.2% compared with last month.</div>
+    <div class="notice"><b>👥 Giza utilization</b>is 11% below target.</div>
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- AUDIT -->
+<section class="page" id="audit">
+
+ <div class="heading">
+  <div>
+   <h1>Audit Trail</h1>
+   <p>Track who viewed, changed or completed system actions.</p>
+  </div>
+  <button class="btn" onclick="exportData('audit')">Export Audit</button>
+ </div>
+
+ <div class="card">
+
+  <div class="card-head">
+   <h3>System Activity</h3>
+   <span class="badge green">Monitoring Active</span>
+  </div>
+
+  <div class="table-wrap">
+   <table>
+    <thead>
+     <tr>
+      <th>Time</th>
+      <th>User</th>
+      <th>Action</th>
+      <th>Object</th>
+      <th>Result</th>
+     </tr>
+    </thead>
+    <tbody id="auditTable"></tbody>
+   </table>
+  </div>
+
+ </div>
+
+</section>
+
+<!-- RESEARCH -->
+<section class="page" id="research">
+
+ <div class="heading">
+  <div>
+   <h1>Legal Research</h1>
+   <p>Search legal resources and statutes.</p>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="card-body">
+
+   <div style="display:flex;gap:8px;margin-bottom:18px">
+    <input id="researchInput"
+     placeholder="Search statutes, regulations, judgments..."
+     style="flex:1;padding:12px;border:1px solid var(--line);border-radius:9px"
+     onkeydown="if(event.key==='Enter')research()">
+    <button class="btn" onclick="research()">Search</button>
+   </div>
+
+   <div id="researchResults">
+
+    <div class="notice">
+     <b>Commercial Companies Law — Article 12</b>
+     Updated 2026 · Corporate governance.
+    </div>
+
+    <div class="notice">
+     <b>Civil Procedure Regulations — Section 48</b>
+     Updated 2026 · Litigation procedure.
+    </div>
+
+    <div class="notice">
+     <b>Real Estate Registration Rules</b>
+     Updated 2026 · Property matters.
+    </div>
+
+   </div>
+
+  </div>
+ </div>
+
+</section>
+
+<!-- SETTINGS -->
+<section class="page" id="settings">
+
+ <div class="heading">
+  <div>
+   <h1>Settings & Security</h1>
+   <p>Roles, permissions and security controls.</p>
+  </div>
+  <button class="btn" onclick="showToast('Settings saved')">Save Changes</button>
+ </div>
+
+ <div class="grid2">
+
+  <div class="card">
+   <div class="card-head"><h3>User Roles</h3></div>
+   <div class="card-body">
+
+    <div class="notice"><b>Administrator</b>Full system access.</div>
+    <div class="notice"><b>Partner / Manager</b>Cases, finance, reports and approvals.</div>
+    <div class="notice"><b>Lawyer</b>Assigned cases, clients and documents.</div>
+    <div class="notice"><b>Staff</b>Tasks, attendance and approved documents.</div>
+
+   </div>
+  </div>
+
+  <div class="card">
+   <div class="card-head"><h3>Security</h3></div>
+   <div class="card-body">
+
+    <div class="stat-top">Two-factor authentication <span class="badge green">Enabled</span></div>
+    <br>
+    <div class="stat-top">Session timeout <b>30 minutes</b></div>
+    <br>
+    <div class="stat-top">Encrypted documents <span class="badge green">Enabled</span></div>
+    <br>
+    <div class="stat-top">Audit logging <span class="badge green">Active</span></div>
+
+   </div>
+  </div>
+
+ </div>
+
+</section>
+
+</div>
+</main>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+
+ <div class="modal-box">
+
+  <div class="modal-head">
+   <h2 id="modalTitle">Create</h2>
+   <button class="close" onclick="closeModal()">×</button>
+  </div>
+
+  <div id="modalContent"></div>
+
+ </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================
+   DATA
+========================= */
+
+const defaultData={
+ cases:[
+  {
+   id:"LEX-2026-1048",
+   client:"Al Noor Holdings",
+   type:"Commercial Dispute",
+   lawyer:"Sarah Ahmed",
+   branch:"Cairo",
+   status:"Urgent"
+  },
+  {
+   id:"LEX-2026-0981",
+   client:"Horizon Group",
+   type:"Civil Litigation",
+   lawyer:"Omar Hassan",
+   branch:"Giza",
+   status:"Hearing"
+  },
+  {
+   id:"LEX-2026-0920",
+   client:"Vertex Ltd.",
+   type:"Property Matter",
+   lawyer:"Mina George",
+   branch:"Alexandria",
+   status:"Active"
+  },
+  {
+   id:"LEX-2026-0887",
+   client:"Delta Investments",
+   type:"Corporate Advisory",
+   lawyer:"Daniel Samir",
+   branch:"Cairo",
+   status:"Completed"
+  }
+ ],
+
+ clients:[
+  {
+   name:"Al Noor Holdings",
+   type:"Corporate",
+   email:"legal@alnoor.example",
+   phone:"+20 100 000 0001",
+   cases:7
+  },
+  {
+   name:"Horizon Group",
+   type:"Corporate",
+   email:"office@horizon.example",
+   phone:"+20 100 000 0002",
+   cases:4
+  },
+  {
+   name:"Delta Investments",
+   type:"Prospect",
+   email:"contact@delta.example",
+   phone:"+20 100 000 0003",
+   cases:2
+  }
+ ],
+
+ documents:[
+  {
+   code:"DOC-88291",
+   name:"Contract Amendment.pdf",
+   file:"LEX-2026-1048",
+   owner:"Sarah Ahmed",
+   access:"Authorized"
+  },
+  {
+   code:"DOC-88177",
+   name:"Court Evidence Bundle.zip",
+   file:"LEX-2026-0981",
+   owner:"Omar Hassan",
+   access:"Request"
+  },
+  {
+   code:"DOC-87920",
+   name:"Property Deed.pdf",
+   file:"LEX-2026-0920",
+   owner:"Mina George",
+   access:"Authorized"
+  }
+ ],
+
+ invoices:[
+  {
+   id:"INV-8921",
+   client:"Al Noor Holdings",
+   case:"LEX-2026-1048",
+   amount:"$12,800",
+   status:"Paid"
+  },
+  {
+   id:"INV-8914",
+   client:"Horizon Group",
+   case:"LEX-2026-0981",
+   amount:"$8,450",
+   status:"Pending"
+  },
+  {
+   id:"INV-8880",
+   client:"Nile Estates",
+   case:"LEX-2026-0804",
+   amount:"$5,200",
+   status:"Overdue"
+  }
+ ],
+
+ tasks:[
+  {
+   title:"Review evidence bundle",
+   case:"LEX-2026-1048",
+   person:"Sarah",
+   status:"To Do"
+  },
+  {
+   title:"Draft client letter",
+   case:"LEX-2026-0920",
+   person:"Mina",
+   status:"To Do"
+  }
+ ],
+
+ audit:[
+  {
+   time:"20:01",
+   user:"Admin",
+   action:"Viewed",
+   object:"LEX-2026-1048",
+   result:"Success"
+  },
+  {
+   time:"19:57",
+   user:"Sarah Ahmed",
+   action:"Uploaded",
+   object:"DOC-88291",
+   result:"Success"
+  }
+ ]
+};
+
+function getData(){
+ let data=localStorage.getItem("lexoraData");
+
+ if(!data){
+  localStorage.setItem("lexoraData",JSON.stringify(defaultData));
+  return structuredClone(defaultData);
+ }
+
+ return JSON.parse(data);
+}
+
+function saveData(data){
+ localStorage.setItem("lexoraData",JSON.stringify(data));
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+function login(){
+
+ const email=document.getElementById("loginEmail").value.trim();
+ const password=document.getElementById("loginPassword").value.trim();
+
+ if(email==="admin@lexora.demo" && password==="demo123"){
+
+  localStorage.setItem("lexoraLoggedIn","true");
+  localStorage.setItem("lexoraUser","Admin");
+
+  document.getElementById("loginScreen").style.display="none";
+  document.getElementById("app").classList.remove("hidden");
+
+  initialize();
+
+ }else{
+
+  document.getElementById("loginError").style.display="block";
+
+ }
+
+}
+
+function logout(){
+
+ localStorage.removeItem("lexoraLoggedIn");
+
+ document.getElementById("app").classList.add("hidden");
+ document.getElementById("loginScreen").style.display="flex";
+
+}
+
+/* ENTER KEY LOGIN */
+
+document.addEventListener("keydown",function(e){
+
+ if(
+  e.key==="Enter" &&
+  document.getElementById("loginScreen").style.display!=="none"
+ ){
+  login();
+ }
+
+});
+
+/* =========================
+   INITIALIZE
+========================= */
+
+function initialize(){
+
+ const user=localStorage.getItem("lexoraUser")||"Admin";
+
+ document.getElementById("welcomeName").textContent=user;
+ document.getElementById("userName").textContent=user;
+ document.getElementById("avatar").textContent=user.substring(0,2).toUpperCase();
+
+ document.getElementById("dateText").textContent=
+ "Monday, 14 September 2026 · Head Office — Cairo";
+
+ renderCases();
+ renderClients();
+ renderDocuments();
+ renderInvoices();
+ renderTasks();
+ renderAudit();
+
+}
+
+if(localStorage.getItem("lexoraLoggedIn")==="true"){
+ document.getElementById("loginScreen").style.display="none";
+ document.getElementById("app").classList.remove("hidden");
+ initialize();
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function openPage(id,element){
+
+ document.querySelectorAll(".page").forEach(p=>{
+  p.classList.remove("active");
+ });
+
+ const page=document.getElementById(id);
+
+ if(page){
+  page.classList.add("active");
+ }
+
+ document.querySelectorAll(".nav-item").forEach(n=>{
+  n.classList.remove("active");
+ });
+
+ if(element){
+  element.classList.add("active");
+ }else{
+
+  document.querySelectorAll(".nav-item").forEach(n=>{
+   if(n.getAttribute("onclick") &&
+      n.getAttribute("onclick").includes("'"+id+"'")){
+    n.classList.add("active");
+   }
+  });
+
+ }
+
+ document.getElementById("sidebar").classList.remove("open");
+
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function toggleSidebar(){
+ document.getElementById("sidebar").classList.toggle("open");
+}
+
+/* =========================
+   MODALS
+========================= */
+
+function openModal(type){
+
+ const modal=document.getElementById("modal");
+ const title=document.getElementById("modalTitle");
+ const content=document.getElementById("modalContent");
+
+ const forms={
+
+  case:{
+   title:"Create New Case",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>File Number</label>
+     <input id="f_case_id" value="LEX-2026-${Math.floor(1000+Math.random()*9000)}">
+    </div>
+
+    <div class="form-group">
+     <label>Case Type</label>
+     <select id="f_case_type">
+      <option>Litigation</option>
+      <option>Commercial Dispute</option>
+      <option>Corporate</option>
+      <option>Real Estate</option>
+      <option>Advisory</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Client</label>
+     <input id="f_case_client" placeholder="Client name">
+    </div>
+
+    <div class="form-group">
+     <label>Responsible Lawyer</label>
+     <select id="f_case_lawyer">
+      <option>Sarah Ahmed</option>
+      <option>Omar Hassan</option>
+      <option>Mina George</option>
+      <option>Daniel Samir</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Branch</label>
+     <select id="f_case_branch">
+      <option>Cairo</option>
+      <option>Giza</option>
+      <option>Alexandria</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Priority</label>
+     <select id="f_case_status">
+      <option>Active</option>
+      <option>Urgent</option>
+      <option>Hearing</option>
+      <option>Pending</option>
+     </select>
+    </div>
+
+    <div class="form-group full">
+     <label>Description</label>
+     <textarea id="f_case_description" rows="4" placeholder="Case description"></textarea>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="createCase()">Create Case</button>
+   </div>
+   `
+  },
+
+  client:{
+   title:"Add Client",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>Client / Company Name</label>
+     <input id="f_client_name">
+    </div>
+
+    <div class="form-group">
+     <label>Type</label>
+     <select id="f_client_type">
+      <option>Corporate</option>
+      <option>Individual</option>
+      <option>Prospect</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Email</label>
+     <input id="f_client_email" type="email">
+    </div>
+
+    <div class="form-group">
+     <label>Phone</label>
+     <input id="f_client_phone">
+    </div>
+
+    <div class="form-group full">
+     <label>Address</label>
+     <textarea id="f_client_address" rows="3"></textarea>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="createClient()">Save Client</button>
+   </div>
+   `
+  },
+
+  document:{
+   title:"Secure Document Upload",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>Document Code</label>
+     <input id="f_doc_code" value="DOC-${Math.floor(10000+Math.random()*90000)}">
+    </div>
+
+    <div class="form-group">
+     <label>File Number</label>
+     <input id="f_doc_file">
+    </div>
+
+    <div class="form-group full">
+     <label>Document Name</label>
+     <input id="f_doc_name">
+    </div>
+
+    <div class="form-group full">
+     <label>Select File</label>
+     <input id="f_doc_upload" type="file">
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="createDocument()">Upload Document</button>
+   </div>
+   `
+  },
+
+  invoice:{
+   title:"Create Invoice",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>Invoice Number</label>
+     <input id="f_inv_id" value="INV-${Math.floor(8000+Math.random()*1000)}">
+    </div>
+
+    <div class="form-group">
+     <label>Client</label>
+     <input id="f_inv_client">
+    </div>
+
+    <div class="form-group">
+     <label>Case Number</label>
+     <input id="f_inv_case">
+    </div>
+
+    <div class="form-group">
+     <label>Amount</label>
+     <input id="f_inv_amount" type="number">
+    </div>
+
+    <div class="form-group">
+     <label>Currency</label>
+     <select id="f_inv_currency">
+      <option>USD</option>
+      <option>EGP</option>
+      <option>EUR</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Status</label>
+     <select id="f_inv_status">
+      <option>Pending</option>
+      <option>Paid</option>
+      <option>Overdue</option>
+     </select>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="createInvoice()">Create Invoice</button>
+   </div>
+   `
+  },
+
+  task:{
+   title:"Assign Task",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group full">
+     <label>Task</label>
+     <input id="f_task_title" placeholder="Task title">
+    </div>
+
+    <div class="form-group">
+     <label>Case</label>
+     <input id="f_task_case">
+    </div>
+
+    <div class="form-group">
+     <label>Assign To</label>
+     <select id="f_task_person">
+      <option>Sarah Ahmed</option>
+      <option>Omar Hassan</option>
+      <option>Mina George</option>
+      <option>Daniel Samir</option>
+     </select>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="createTask()">Assign Task</button>
+   </div>
+   `
+  },
+
+  leave:{
+   title:"Leave Request",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>Leave Type</label>
+     <select>
+      <option>Annual Leave</option>
+      <option>Sick Leave</option>
+      <option>Emergency Leave</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Approver</label>
+     <select>
+      <option>Department Manager</option>
+      <option>HR Manager</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Start Date</label>
+     <input type="date">
+    </div>
+
+    <div class="form-group">
+     <label>End Date</label>
+     <input type="date">
+    </div>
+
+    <div class="form-group full">
+     <label>Reason</label>
+     <textarea rows="3"></textarea>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Leave request submitted for approval')">Submit Request</button>
+   </div>
+   `
+  },
+
+  event:{
+   title:"Create Calendar Event",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group full">
+     <label>Event Title</label>
+     <input id="eventTitle">
+    </div>
+
+    <div class="form-group">
+     <label>Date</label>
+     <input type="date">
+    </div>
+
+    <div class="form-group">
+     <label>Time</label>
+     <input type="time">
+    </div>
+
+    <div class="form-group full">
+     <label>Notes</label>
+     <textarea rows="3"></textarea>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Calendar event created')">Create Event</button>
+   </div>
+   `
+  },
+
+  time:{
+   title:"Add Time Entry",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>Case</label>
+     <input>
+    </div>
+
+    <div class="form-group">
+     <label>Hours</label>
+     <input type="number" step=".1">
+    </div>
+
+    <div class="form-group full">
+     <label>Description</label>
+     <textarea rows="3"></textarea>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Time entry added')">Save Entry</button>
+   </div>
+   `
+  },
+
+  email:{
+   title:"Compose Professional Email",
+   html:`
+   <div class="form-group">
+    <label>To</label>
+    <input type="email" placeholder="client@example.com">
+   </div>
+
+   <div class="form-group">
+    <label>Subject</label>
+    <input>
+   </div>
+
+   <div class="form-group">
+    <label>Message</label>
+    <textarea rows="8"></textarea>
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Email sent and correspondence logged')">Send Email</button>
+   </div>
+   `
+  },
+
+  notice:{
+   title:"Create Announcement",
+   html:`
+   <div class="form-group">
+    <label>Title</label>
+    <input id="noticeTitle">
+   </div>
+
+   <div class="form-group">
+    <label>Message</label>
+    <textarea id="noticeMessage" rows="5"></textarea>
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="createNotice()">Publish</button>
+   </div>
+   `
+  },
+
+  staff:{
+   title:"Add Staff Member",
+   html:`
+   <div class="form-grid">
+
+    <div class="form-group">
+     <label>Full Name</label>
+     <input>
+    </div>
+
+    <div class="form-group">
+     <label>Role</label>
+     <select>
+      <option>Lawyer</option>
+      <option>Manager</option>
+      <option>Staff</option>
+      <option>Administrator</option>
+     </select>
+    </div>
+
+    <div class="form-group">
+     <label>Email</label>
+     <input type="email">
+    </div>
+
+    <div class="form-group">
+     <label>Department</label>
+     <input>
+    </div>
+
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Staff member added')">Add Staff</button>
+   </div>
+   `
+  },
+
+  branch:{
+   title:"Add Branch",
+   html:`
+   <div class="form-group">
+    <label>Branch Name</label>
+    <input>
+   </div>
+
+   <div class="form-group">
+    <label>Address</label>
+    <input>
+   </div>
+
+   <div class="form-group">
+    <label>Branch Manager</label>
+    <input>
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Branch created')">Create Branch</button>
+   </div>
+   `
+  },
+
+  chat:{
+   title:"Create Team Room",
+   html:`
+   <div class="form-group">
+    <label>Room Name</label>
+    <input id="roomName" placeholder="e.g. # Corporate Team">
+   </div>
+
+   <div class="form-actions">
+    <button class="btn secondary" onclick="closeModal()">Cancel</button>
+    <button class="btn" onclick="saveAction('Team room created')">Create Room</button>
+   </div>
+   `
+  }
+
+ };
+
+ const form=forms[type];
+
+ if(!form)return;
+
+ document.getElementById("modalTitle").textContent=form.title;
+ document.getElementById("modalContent").innerHTML=form.html;
+
+ document.getElementById("modal").classList.add("show");
+}
+
+function closeModal(){
+ document.getElementById("modal").classList.remove("show");
+}
+
+function saveAction(message){
+ closeModal();
+ addAudit("System",message,"Portal");
+ showToast(message);
+}
+
+/* =========================
+   CREATE CASE
+========================= */
+
+function createCase(){
+
+ const data=getData();
+
+ const item={
+  id:document.getElementById("f_case_id").value,
+  client:document.getElementById("f_case_client").value||"Unnamed Client",
+  type:document.getElementById("f_case_type").value,
+  lawyer:document.getElementById("f_case_lawyer").value,
+  branch:document.getElementById("f_case_branch").value,
+  status:document.getElementById("f_case_status").value
+ };
+
+ data.cases.unshift(item);
+
+ saveData(data);
+
+ renderCases();
+
+ document.getElementById("statCases").textContent=data.cases.length;
+
+ closeModal();
+
+ addAudit("Admin","Created case",item.id);
+
+ showToast("Case "+item.id+" created successfully");
+
+}
+
+/* =========================
+   CLIENT
+========================= */
+
+function createClient(){
+
+ const data=getData();
+
+ const item={
+  name:document.getElementById("f_client_name").value||"Unnamed Client",
+  type:document.getElementById("f_client_type").value,
+  email:document.getElementById("f_client_email").value||"—",
+  phone:document.getElementById("f_client_phone").value||"—",
+  cases:0
+ };
+
+ data.clients.unshift(item);
+
+ saveData(data);
+
+ renderClients();
+
+ document.getElementById("clientCount").textContent=data.clients.length;
+
+ closeModal();
+
+ addAudit("Admin","Created client",item.name);
+
+ showToast("Client added successfully");
+
+}
+
+/* =========================
+   DOCUMENT
+========================= */
+
+function createDocument(){
+
+ const data=getData();
+
+ const item={
+  code:document.getElementById("f_doc_code").value,
+  name:document.getElementById("f_doc_name").value||"Uploaded Document",
+  file:document.getElementById("f_doc_file").value||"Unlinked",
+  owner:"Admin",
+  access:"Authorized"
+ };
+
+ data.documents.unshift(item);
+
+ saveData(data);
+
+ renderDocuments();
+
+ closeModal();
+
+ addAudit("Admin","Uploaded document",item.code);
+
+ showToast("Document securely stored");
+
+}
+
+/* =========================
+   INVOICE
+========================= */
+
+function createInvoice(){
+
+ const data=getData();
+
+ const currency=document.getElementById("f_inv_currency").value;
+
+ const item={
+  id:document.getElementById("f_inv_id").value,
+  client:document.getElementById("f_inv_client").value||"Unknown Client",
+  case:document.getElementById("f_inv_case").value||"—",
+  amount:currency+" "+(document.getElementById("f_inv_amount").value||"0"),
+  status:document.getElementById("f_inv_status").value
+ };
+
+ data.invoices.unshift(item);
+
+ saveData(data);
+
+ renderInvoices();
+
+ closeModal();
+
+ addAudit("Admin","Created invoice",item.id);
+
+ showToast("Invoice created successfully");
+
+}
+
+/* =========================
+   TASK
+========================= */
+
+function createTask(){
+
+ const data=getData();
+
+ const item={
+  title:document.getElementById("f_task_title").value||"New Task",
+  case:document.getElementById("f_task_case").value||"—",
+  person:document.getElementById("f_task_person").value,
+  status:"To Do"
+ };
+
+ data.tasks.unshift(item);
+
+ saveData(data);
+
+ renderTasks();
+
+ closeModal();
+
+ addAudit("Admin","Assigned task",item.title);
+
+ showToast("Task assigned successfully");
+
+}
+
+/* =========================
+   RENDER CASES
+========================= */
+
+function renderCases(){
+
+ const data=getData();
+ const tbody=document.getElementById("caseTable");
+
+ tbody.innerHTML="";
+
+ data.cases.forEach((item,index)=>{
+
+  let badge="blue";
+
+  if(item.status==="Urgent")badge="red";
+  if(item.status==="Hearing")badge="orange";
+  if(item.status==="Completed")badge="green";
+
+  const tr=document.createElement("tr");
+
+  tr.innerHTML=`
+   <td><b>${escapeHTML(item.id)}</b></td>
+   <td>${escapeHTML(item.client)}</td>
+   <td>${escapeHTML(item.type)}</td>
+   <td>${escapeHTML(item.lawyer)}</td>
+   <td>${escapeHTML(item.branch)}</td>
+   <td><span class="badge ${badge}">${escapeHTML(item.status)}</span></td>
+   <td>
+    <button class="tab" onclick="deleteCase(${index})">Delete</button>
+   </td>
+  `;
+
+  tbody.appendChild(tr);
+
+ });
+
+}
+
+/* =========================
+   RENDER CLIENTS
+========================= */
+
+function renderClients(){
+
+ const data=getData();
+ const tbody=document.getElementById("clientTable");
+
+ tbody.innerHTML="";
+
+ data.clients.forEach((item,index)=>{
+
+  const tr=document.createElement("tr");
+
+  tr.innerHTML=`
+   <td><b>${escapeHTML(item.name)}</b></td>
+   <td>${escapeHTML(item.type)}</td>
+   <td>${escapeHTML(item.email)}</td>
+   <td>${escapeHTML(item.phone)}</td>
+   <td>${item.cases}</td>
+   <td>
+    <button class="tab" onclick="deleteClient(${index})">Delete</button>
+   </td>
+  `;
+
+  tbody.appendChild(tr);
+
+ });
+
+}
+
+/* =========================
+   RENDER DOCUMENTS
+========================= */
+
+function renderDocuments(){
+
+ const data=getData();
+ const tbody=document.getElementById("documentTable");
+
+ tbody.innerHTML="";
+
+ data.documents.forEach((item,index)=>{
+
+  const accessClass=item.access==="Authorized"?"green":"orange";
+
+  const tr=document.createElement("tr");
+
+  tr.innerHTML=`
+   <td><b>${escapeHTML(item.code)}</b></td>
+   <td>${escapeHTML(item.name)}</td>
+   <td>${escapeHTML(item.file)}</td>
+   <td>${escapeHTML(item.owner)}</td>
+   <td><span class="badge ${accessClass}">${escapeHTML(item.access)}</span></td>
+   <td>
+    <button class="tab" onclick="requestDocument(${index})">
+     ${item.access==="Authorized"?"Open":"Request Access"}
+    </button>
+   </td>
+  `;
+
+  tbody.appendChild(tr);
+
+ });
+
+}
+
+/* =========================
+   RENDER INVOICES
+========================= */
+
+function renderInvoices(){
+
+ const data=getData();
+ const tbody=document.getElementById("invoiceTable");
+
+ tbody.innerHTML="";
+
+ data.invoices.forEach((item,index)=>{
+
+  let cls="orange";
+
+  if(item.status==="Paid")cls="green";
+  if(item.status==="Overdue")cls="red";
+
+  const tr=document.createElement("tr");
+
+  tr.innerHTML=`
+   <td><b>${escapeHTML(item.id)}</b></td>
+   <td>${escapeHTML(item.client)}</td>
+   <td>${escapeHTML(item.case)}</td>
+   <td>${escapeHTML(item.amount)}</td>
+   <td><span class="badge ${cls}">${escapeHTML(item.status)}</span></td>
+   <td>
+    <button class="tab" onclick="markPaid(${index})">
+     Mark Paid
+    </button>
+   </td>
+  `;
+
+  tbody.appendChild(tr);
+
+ });
+
+}
+
+/* =========================
+   RENDER TASKS
+========================= */
+
+function renderTasks(){
+
+ const data=getData();
+ const box=document.getElementById("todoTasks");
+
+ box.innerHTML="";
+
+ data.tasks
+ .filter(t=>t.status==="To Do")
+ .forEach((item,index)=>{
+
+  const div=document.createElement("div");
+
+  div.className="notice";
+
+  div.innerHTML=`
+   <b>${escapeHTML(item.title)}</b>
+   ${escapeHTML(item.case)}
+   <br>
+   <small>${escapeHTML(item.person)}</small>
+   <br><br>
+   <button class="tab" onclick="completeTask(${index})">Complete</button>
+  `;
+
+  box.appendChild(div);
+
+ });
+
+}
+
+/* =========================
+   RENDER AUDIT
+========================= */
+
+function renderAudit(){
+
+ const data=getData();
+ const tbody=document.getElementById("auditTable");
+
+ tbody.innerHTML="";
+
+ data.audit.forEach(item=>{
+
+  const tr=document.createElement("tr");
+
+  tr.innerHTML=`
+   <td>${escapeHTML(item.time)}</td>
+   <td>${escapeHTML(item.user)}</td>
+   <td>${escapeHTML(item.action)}</td>
+   <td>${escapeHTML(item.object)}</td>
+   <td><span class="badge green">${escapeHTML(item.result)}</span></td>
+  `;
+
+  tbody.appendChild(tr);
+
+ });
+
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+function deleteCase(index){
+
+ if(!confirm("Delete this case?"))return;
+
+ const data=getData();
+
+ const removed=data.cases.splice(index,1)[0];
+
+ saveData(data);
+
+ renderCases();
+
+ document.getElementById("statCases").textContent=data.cases.length;
+
+ addAudit("Admin","Deleted case",removed.id);
+
+ showToast("Case deleted");
+
+}
+
+function deleteClient(index){
+
+ if(!confirm("Delete this client?"))return;
+
+ const data=getData();
+
+ const removed=data.clients.splice(index,1)[0];
+
+ saveData(data);
+
+ renderClients();
+
+ addAudit("Admin","Deleted client",removed.name);
+
+ showToast("Client deleted");
+
+}
+
+function requestDocument(index){
+
+ const data=getData();
+
+ if(data.documents[index].access==="Authorized"){
+
+  showToast("Document opened securely");
+
+  addAudit("Admin","Accessed document",data.documents[index].code);
+
+ }else{
+
+  data.documents[index].access="Request Pending";
+
+  saveData(data);
+
+  renderDocuments();
+
+  addAudit("Admin","Requested document access",data.documents[index].code);
+
+  showToast("Access request submitted");
+
+ }
+
+}
+
+function markPaid(index){
+
+ const data=getData();
+
+ data.invoices[index].status="Paid";
+
+ saveData(data);
+
+ renderInvoices();
+
+ addAudit("Admin","Marked invoice paid",data.invoices[index].id);
+
+ showToast("Payment recorded");
+
+}
+
+function completeTask(index){
+
+ const data=getData();
+
+ data.tasks[index].status="Completed";
+
+ saveData(data);
+
+ renderTasks();
+
+ addAudit("Admin","Completed task",data.tasks[index].title);
+
+ showToast("Task completed");
+
+}
+
+function approve(button){
+
+ button.closest(".notice").innerHTML=
+ "<b>Approved ✓</b>This request has been approved.";
+
+ showToast("Request approved");
+
+ addAudit("Admin","Approved request","Workflow");
+
+}
+
+function reject(button){
+
+ button.closest(".notice").innerHTML=
+ "<b style='color:#d74c59'>Rejected</b>This request has been rejected.";
+
+ showToast("Request rejected");
+
+ addAudit("Admin","Rejected request","Workflow");
+
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchDocuments(){
+
+ const query=document.getElementById("documentSearch").value.toLowerCase();
+
+ const data=getData();
+
+ const rows=document.querySelectorAll("#documentTable tr");
+
+ rows.forEach((row,index)=>{
+
+  const item=data.documents[index];
+
+  if(!item)return;
+
+  const text=
+   (item.code+" "+item.name+" "+item.file)
+   .toLowerCase();
+
+  row.style.display=text.includes(query)?"":"none";
+
+ });
+
+}
+
+function globalSearch(event){
+
+ if(event.key!=="Enter")return;
+
+ const value=document.getElementById("globalSearch").value.trim();
+
+ if(!value)return;
+
+ const data=getData();
+
+ const foundCase=data.cases.find(c=>
+  JSON.stringify(c).toLowerCase().includes(value.toLowerCase())
+ );
+
+ const foundClient=data.clients.find(c=>
+  JSON.stringify(c).toLowerCase().includes(value.toLowerCase())
+ );
+
+ if(foundCase){
+
+  openPage("cases");
+
+  showToast("Case found: "+foundCase.id);
+
+ }else if(foundClient){
+
+  openPage("clients");
+
+  showToast("Client found: "+foundClient.name);
+
+ }else{
+
+  showToast("No matching record found");
+
+ }
+
+}
+
+/* =========================
+   CHAT
+========================= */
+
+function sendChat(event){
+
+ if(event.key!=="Enter")return;
+
+ const input=document.getElementById("chatInput");
+
+ if(!input.value.trim())return;
+
+ const card=input.closest(".card-body");
+
+ const msg=document.createElement("div");
+
+ msg.className="notice";
+
+ msg.innerHTML="<b>Admin</b>"+escapeHTML(input.value);
+
+ card.insertBefore(msg,input);
+
+ input.value="";
+
+ showToast("Message sent");
+
+ addAudit("Admin","Sent team message","# Litigation Team");
+
+}
+
+/* =========================
+   RESEARCH
+========================= */
+
+function research(){
+
+ const q=document.getElementById("researchInput").value.trim();
+
+ if(!q){
+
+  showToast("Enter a search term");
+
+  return;
+
+ }
+
+ document.getElementById("researchResults").innerHTML=`
+
+  <div class="notice">
+   <b>Research search</b>
+   Results for: "${escapeHTML(q)}"
+   <br><small>This demo interface is ready to connect to a legal research API.</small>
+  </div>
+
+  <div class="notice">
+   <b>Relevant legal resource</b>
+   Search result matched the selected legal topic.
+  </div>
+
+ `;
+
+ addAudit("Admin","Performed legal research",q);
+
+}
+
+/* =========================
+   ANNOUNCEMENT
+========================= */
+
+function createNotice(){
+
+ const title=document.getElementById("noticeTitle").value||"New Announcement";
+
+ const message=document.getElementById("noticeMessage").value||"New firm announcement.";
+
+ const list=document.getElementById("announcementList");
+
+ const notice=document.createElement("div");
+
+ notice.className="notice";
+
+ notice.innerHTML=`
+  <b>${escapeHTML(title)}</b>
+  ${escapeHTML(message)}
+ `;
+
+ list.prepend(notice);
+
+ closeModal();
+
+ addAudit("Admin","Published announcement",title);
+
+ showToast("Announcement published");
+
+}
+
+/* =========================
+   AUDIT
+========================= */
+
+function addAudit(user,action,object){
+
+ const data=getData();
+
+ const now=new Date();
+
+ const time=now.toLocaleTimeString([],{
+  hour:"2-digit",
+  minute:"2-digit"
+ });
+
+ data.audit.unshift({
+  time,
+  user,
+  action,
+  object,
+  result:"Success"
+ });
+
+ data.audit=data.audit.slice(0,100);
+
+ saveData(data);
+
+ renderAudit();
+
+}
+
+/* =========================
+   EXPORT
+========================= */
+
+function exportData(type){
+
+ const data=getData();
+
+ let rows=[];
+
+ if(type==="cases"){
+  rows=[
+   ["File","Client","Type","Lawyer","Branch","Status"],
+   ...data.cases.map(x=>[
+    x.id,x.client,x.type,x.lawyer,x.branch,x.status
+   ])
+  ];
+ }
+
+ if(type==="invoices"){
+  rows=[
+   ["Invoice","Client","Case","Amount","Status"],
+   ...data.invoices.map(x=>[
+    x.id,x.client,x.case,x.amount,x.status
+   ])
+  ];
+ }
+
+ if(type==="audit"){
+  rows=[
+   ["Time","User","Action","Object","Result"],
+   ...data.audit.map(x=>[
+    x.time,x.user,x.action,x.object,x.result
+   ])
+  ];
+ }
+
+ const csv=rows
+ .map(row=>row.map(v=>`"${String(v).replaceAll('"','""')}"`).join(","))
+ .join("\n");
+
+ const blob=new Blob([csv],{type:"text/csv"});
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement("a");
+
+ a.href=url;
+ a.download="lexora-"+type+".csv";
+
+ a.click();
+
+ URL.revokeObjectURL(url);
+
+ showToast("CSV exported");
+
+}
+
+/* =========================
+   UTILITY
+========================= */
+
+function escapeHTML(value){
+
+ return String(value)
+ .replaceAll("&","&amp;")
+ .replaceAll("<","&lt;")
+ .replaceAll(">","&gt;")
+ .replaceAll('"',"&quot;")
+ .replaceAll("'","&#039;");
+
+}
+
+function showToast(message){
+
+ const toast=document.getElementById("toast");
+
+ toast.textContent=message;
+ toast.style.display="block";
+
+ clearTimeout(window.toastTimer);
+
+ window.toastTimer=setTimeout(()=>{
+  toast.style.display="none";
+ },2800);
+
+}
+
+/* CLOSE MODAL BY CLICKING OUTSIDE */
+
+document.getElementById("modal").addEventListener("click",function(e){
+
+ if(e.target===this){
+  closeModal();
+ }
+
+});
+
+</script>
+
+</body>
+</html>
+```
